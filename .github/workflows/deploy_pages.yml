@@ -19,7 +19,7 @@ concurrency:
 env:
   FILE: 'slides.py'  # Source file where scenes are defined
   MANIM: 'manim'  # manim or manimgl - which Manim renderer to use
-  SCENES: ' Ex9 Ex10 Ex11 Ex12 Ex13 Ex14 Ex15 Ex16 Ex17 Ex18 Ex19 Ex20 Ex21 Ex22 Super'  # Space-separated list of scenes to render
+  SCENES: 'Obj Intro Charge Charge2 Charge3 Ex1 Ex2 Ex3 Ex4 Ex5 Ex6 Ex7 Ex8 Cond Induc Ex9 Ex10 Ex11 Ex12 Ex13 Ex14 Ex15 Ex16 Ex17 Ex18 Ex19 Ex20 Ex21 Ex22 Super'  # Space-separated list of scenes to render
   USES_TEX: true  # true or false - disabling this will make the action run faster
   DISPLAY: :99  # Do not touch this
 
@@ -93,7 +93,7 @@ jobs:
     - name: Build HTML
       run: |
         ${{ env.MANIM }} ${{ env.FILE }} ${{ env.SCENES }}
-        manim-slides convert -ccontrols=true ${{ env.SCENES }} _site/index.html
+        manim-slides convert -ccontrols=true -cprogress=true ${{ env.SCENES }} _site/index.html
 
     - name: Push to gh-pages branch
       if: github.event_name != 'pull_request'
