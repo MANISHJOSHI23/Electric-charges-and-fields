@@ -696,9 +696,11 @@ class Coulm(Slide):
         q2_text=Tex('$q_2$').next_to(q2,DOWN,buff=0).scale(0.5)
         arrow = DoubleArrow(q1.get_center(),q2.get_center(), tip_length=0.2, color=YELLOW,buff=0).shift(0.7*DOWN)
         arrow_text=Tex('$r$').next_to(arrow,UP,buff=0).scale(0.5)
-        f1_arrow = LabeledArrow("F",start=q1.get_right(),end=q1.get_right()+[0.8,0,0],buff=0,color=GREEN_D,font_size=20,label_frame=False,frame_fill_opacity=0.8) 
-        f2_arrow = LabeledArrow("F",start=q2.get_left(),end=q2.get_left()-[0.8,0,0],buff=0,color=ORANGE,font_size=20,label_frame=False,frame_fill_opacity=0.8)
-        g1 = VGroup(q1,q2,q1_text,q2_text,arrow,arrow_text,f1_arrow,f2_arrow)
+        f1_arrow = Arrow(start=q1.get_right(),end=q1.get_right()+[0.8,0,0],buff=0,color=GREEN_D) 
+        f1_tex=Tex('$F_1$').next_to(f1_arrow,UP,buff=0).scale(0.5)
+        f2_arrow = Arrow(start=q2.get_left(),end=q2.get_left()-[0.8,0,0],buff=0,color=ORANGE)
+        f2_tex=Tex('$F_2$').next_to(f2_arrow,UP,buff=0).scale(0.5)
+        g1 = VGroup(q1,q2,q1_text,q2_text,arrow,arrow_text,f1_arrow, f1_tex,f2_tex,f2_arrow)
         list3 =  LatexItems( r"\item Coulomb's law is a quantitative statement about the force between two point charges.", 
                             r"\item Coulomb measured the force between two point charges and found that it varied inversely as the square of the distance between the charges and was directly proportional to the product of the magnitude of the two charges and acted along the line joining the two charges. ",
                             r"\item Mathematically, magnitude of electrostatic force $(F)$  between two stationary charges $(q_1,\ q_2)$ seperated by a distance $r$ in vacuum is\\ \[F\propto \dfrac{\left|q_1q_2\right|}{r^2} \qquad \text{Or}\qquad F = k\dfrac{\left|q_1q_2\right|}{r^2}\]",
@@ -751,13 +753,15 @@ class Coulm_Vec(Slide):
         vector_2 = Arrow(ax.coords_to_point(0,0),ax.coords_to_point(5,5),buff=0,color=BLUE)
         v1_lbl = MathTex('\\vec{r}_1').scale(1.5).move_to(ax.coords_to_point(0.8,3))
         v2_lbl = Tex('$\\vec{r}_{2}$').scale(1.5).move_to(ax.coords_to_point(3.8,3))
-        f1_arrow = LabeledArrow("F_{12}",start=q1.get_left(),end=q1.get_left()-[2.5,0,0],buff=0,color=GREEN_D,font_size=60,label_frame=False,frame_fill_opacity=0.2) 
-        f2_arrow = LabeledArrow("F_{21}",start=q2.get_right(),end=q2.get_right()+[2.5,0,0],buff=0,color=ORANGE,font_size=60,label_frame=False,frame_fill_opacity=0.2)
+        f1_arrow = Arrow(start=q1.get_left(),end=q1.get_left()-[2.5,0,0],buff=0,color=GREEN_D) 
+        f2_arrow = Arrow(start=q2.get_right(),end=q2.get_right()+[2.5,0,0],buff=0)
+        f1_lbl = Tex('$\\vec{F}_{12}$').scale(1.5).next_to(f1_arrow,UP)
+        f2_lbl = Tex('$\\vec{F}_{21}$').scale(1.5).next_to(f2_arrow,UP)
         vector_3 = Arrow(ax.coords_to_point(2,5),ax.coords_to_point(5,5),buff=0,color=YELLOW)
         v3_lbl = MathTex('\\vec{r}_{21 } ').scale(1.5).move_to(ax.coords_to_point(3.5,5.3))
         vector_4 = Arrow(ax.coords_to_point(5,5),ax.coords_to_point(2,5),buff=0,color=RED).shift(UP)
         v4_lbl = MathTex('\\vec{r}_{12 } ').scale(1.5).next_to(vector_4,UP)
-        g1 = VGroup(ax,q1,q2,q1_text,q2_text,vector_1,vector_2,v1_lbl,v2_lbl,f1_arrow,f2_arrow,vector_3,v3_lbl,vector_4,v4_lbl).scale(0.45).next_to(Coulm_title,DOWN).to_edge(RIGHT)
+        g1 = VGroup(ax,q1,q2,q1_text,q2_text,vector_1,vector_2,v1_lbl,v2_lbl,f1_arrow,f2_arrow,f1_lbl,f2_lbl,vector_3,v3_lbl,vector_4,v4_lbl).scale(0.45).next_to(Coulm_title,DOWN).to_edge(RIGHT)
         list3 =  LatexItems( r"\item $q_1,\ q_2 \rightarrow$ Two point charges",
                             r"\item $\vec{r}_1,\ \vec{r}_2 \rightarrow$ Position vectors of $q_1$ and $q_2$ ",
                             r"\item $\vec{F}_{12}\rightarrow$ Force on $q_1$ due to $q_2$",
@@ -776,10 +780,10 @@ class Coulm_Vec(Slide):
         self.play(Create(VGroup(ax,vector_1,vector_2,v1_lbl,v2_lbl)))
         self.play(Write(list3[1]))
         self.next_slide()
-        self.play(Create(VGroup(f1_arrow)))
+        self.play(Create(VGroup(f1_arrow)),Write(f1_lbl))
         self.play(Write(list3[2]))
         self.next_slide()
-        self.play(Create(VGroup(f2_arrow)))
+        self.play(Create(VGroup(f2_arrow)),Write(f2_lbl))
         self.play(Write(list3[3]))
         self.next_slide()
         self.play(Create(VGroup(vector_3,v3_lbl)))
@@ -804,6 +808,7 @@ class Coulm_Vec(Slide):
         self.play(Write(list4[1]))
         self.next_slide()
         self.play(Write(list4[2]))
+
         
 class Ex9(Slide):
     def construct(self):
