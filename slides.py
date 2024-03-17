@@ -1254,8 +1254,133 @@ class Super(Slide):
         self.next_slide()
         Super_lbl = Tex('The superposition principle :',color=BLUE).next_to(title,DOWN,buff=0.5).to_corner(LEFT).scale(0.8)
         self.play(Write(Super_lbl))
-        list3 = BulletedList('This pricnciple tells us that if charge $q_1$ is acted upon by several charges $q_2,\ q_3, ......, \ q_n$, then the force on $q_1$ can be found out by calculating separately the force $\\vec{F}_{12},\ \\vec{F}_{13},\ .......,\ \\vec{F}_{1n}$ exerted by $q_2,\ q_3,\ .......,\ q_n$, respenctively on $q_1$, then adding these forces vectorially.','Their resultant $\\vec{F}_1$ is that total force on $q_1$ due to the collection of charges.').scale(0.7).next_to(Super_lbl,DOWN).to_corner(LEFT).shift(0.5*RIGHT)
+        ax = Axes(x_range=[0,6],y_range=[0, 6],x_length=10,y_length=8)
+        q1 = Dot(ax.coords_to_point(5,5),color=YELLOW).scale(2.5)
+        q2 = Dot(ax.coords_to_point(1,3),color=YELLOW).scale(2.5)
+        q3 = Dot(ax.coords_to_point(5,2),color=YELLOW).scale(2.5)
+        q1_text=Tex('$q_1$').next_to(q1,DR,buff=0.2).scale(1.5)
+        q2_text=Tex('$q_2$').next_to(q2,UP,buff=0.2).scale(1.5)
+        q3_text=Tex('$q_3$').next_to(q3,RIGHT,buff=0.2).scale(1.5)
+        vector_1 = Arrow(ax.coords_to_point(0,0),ax.coords_to_point(5,5),buff=0,color=BLUE)
+        vector_2 = Arrow(ax.coords_to_point(0,0),ax.coords_to_point(1,3),buff=0,color=BLUE)
+        vector_3 = Arrow(ax.coords_to_point(0,0),ax.coords_to_point(5,2),buff=0,color=BLUE)
+        v1_lbl = MathTex('\\vec{r}_1').scale(1.5).move_to(ax.coords_to_point(3.8,3))
+        v2_lbl = Tex('$\\vec{r}_{2}$').scale(1.5).move_to(ax.coords_to_point(0.2,2))
+        v3_lbl = Tex('$\\vec{r}_{3}$').scale(1.5).move_to(ax.coords_to_point(3.8,1))
+        vector_12 = Arrow(ax.coords_to_point(1,3),ax.coords_to_point(5,5),buff=0,color=RED)
+        v12_lbl = MathTex('\\vec{r}_{12 } ').scale(1.5).move_to(ax.coords_to_point(3.5,5.3))
+        vector_13 = Arrow(start=ax.coords_to_point(5,2),end=ax.coords_to_point(5,5),buff=0,color=RED)
+        v13_lbl = MathTex('\\vec{r}_{13 } ').scale(1.5).next_to(vector_13,RIGHT)
+        f12_arrow = Arrow(start=q1.get_center(),end=q1.get_center()+[3,1.5,0],buff=0,color=GREEN_D) 
+        f13_arrow = Arrow(start=q1.get_center(),end=q1.get_center()+[0,3,0],buff=0,color=PINK)
+        f12_lbl = Tex('$\\vec{F}_{12}$').scale(1.5).move_to(ax.coords_to_point(6,5))
+        f13_lbl = Tex('$\\vec{F}_{13}$').scale(1.5).next_to(f13_arrow,LEFT)
+        f12_line = DashedLine(start=q1.get_center()+[3,1.5,0],end=q1.get_center()+[3,4.5,0],buff=0,color=PINK)
+        f13_line = DashedLine(start=q1.get_center()+[3,4.5,0],end=q1.get_center()+[0,3,0],buff=0,color=GREEN_D)
+        f1_arrow = Arrow(start=q1.get_center(),end=q1.get_center()+[3,4.5,0],buff=0,color=YELLOW) 
+        f1_lbl = Tex('$\\vec{F}_{1}$').scale(1.5).move_to(ax.coords_to_point(6.2,6.5))
+        g1 = VGroup(ax,q1,q2,q3,q1_text,q2_text,q3_text,vector_1,vector_2,v1_lbl,v2_lbl,vector_12,v12_lbl,f12_arrow,f13_arrow,f12_lbl,f13_lbl,vector_3,v3_lbl,vector_13,v13_lbl,f12_line,f13_line,f1_arrow,f1_lbl).scale(0.45).next_to(Super_lbl,DOWN).to_edge(RIGHT)
+        
+
+        list3 =  LatexItems( r"\item This pricnciple tells us that if charge $q_1$ is acted upon by several charges $q_2,\ q_3, ......, \ q_n$, then the force on $q_1$ can be found out by calculating separately the force $\vec{F}_{12},\ \vec{F}_{13},\ ...,\ \vec{F}_{1n}$ exerted by $q_2,\ q_3,\ ...,\ q_n$, respenctively on $q_1$, then adding these forces vectorially.",
+                            r"\item Their resultant $\vec{F}_1$ is that total force on $q_1$ due to the collection of charges.\[\vec{F}_1=\vec{F}_{12}+\vec{F}_{13}+....\vec{F}_{1n}\]",
+                            itemize="itemize" ,page_width="25em").scale(0.7).next_to(Super_lbl,DOWN).to_edge(LEFT)
         self.next_slide()
+        g2=Group(list3,g1).arrange(RIGHT,buff=0.15).next_to(Super_lbl,DOWN).shift(RIGHT).to_corner(LEFT)
         for item in list3:
             self.play(Write(item))
             self.next_slide()
+        self.play(FadeIn(q1,q2,q3),Write(q1_text),Write(q2_text),Write(q3_text))
+        self.next_slide()
+        self.play(Create(VGroup(ax,vector_1,vector_2,vector_3,v1_lbl,v3_lbl,v2_lbl)))
+        self.next_slide()
+        self.play(Create(VGroup(vector_12,v12_lbl)))
+        self.next_slide()
+        self.play(Create(VGroup(vector_13,v13_lbl)))
+        self.next_slide()
+        self.play(Create(VGroup(f12_arrow)),Write(f12_lbl))
+        self.next_slide()
+        self.play(Create(VGroup(f13_arrow)),Write(f13_lbl))
+        self.next_slide()
+        self.play(Create(VGroup(f1_arrow,f13_line,f12_line)),Write(f1_lbl))
+        self.next_slide()
+        list3.scale(0.7)
+        g1.scale(0.7)
+        list4 =  LatexItems( r"\item\[ \vec{F}_1=\dfrac{1}{4\pi\epsilon_0}\dfrac{q_1q_2}{|\vec{r}_{12}|^2} \hat{r}_{12}+\dfrac{1}{4\pi\epsilon_0}\dfrac{q_1q_3}{|\vec{r}_{13}|^2} \hat{r}_{13}+....+\dfrac{1}{4\pi\epsilon_0}\dfrac{q_1q_n}{|\vec{r}_{1n}|^2 }\hat{r}_{1n}\]",r"\item \[\vec{F}_{1}=\dfrac{q_1}{4\pi\epsilon_0}\left[\dfrac{q_2}{|\vec{r}_{12}|^2} \hat{r}_{12} + \dfrac{q_3}{|\vec{r}_{13}|^2} \hat{r}_{13}+....+\dfrac{q_n}{|\vec{r}_{1n}|^2 }\hat{r}_{1n} \right]\]",r"\item\[\vec{F}_1=\dfrac{q_1}{4\pi\epsilon_0}\left[\sum_{i=2}^{n} \dfrac{q_i}{|\vec{r}_{1i}|^2} \hat{r}_{1i}\right]\]",
+                            itemize="itemize" ,page_width="30em").scale(0.7).next_to(g2,DOWN).scale(0.8).align_to(g2,LEFT)
+        
+        self.play(FadeOut(super_title))
+        g3 = Group(g1,list4).arrange(DOWN).next_to(list3,RIGHT)
+        Group(list3,g3).arrange(RIGHT)
+        for item in list4:
+            self.play(Write(item))
+            self.next_slide()
+
+class Ex23(Slide):
+    def construct(self):
+        myBaseTemplate = TexTemplate(
+            documentclass="\documentclass[preview]{standalone}"
+        )
+        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
+
+        ex_title = Tex("\\justifying {Example 17: Point charges $q_1 = 50\ \mu$ C and $q_2 = -25\ \mu$C are placed 1.0 m apart. What is the force on a third charge $q_3 = 20\ \mu$C placed midway between $q_1$ and $q_2$ ? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        self.play(Write(ex_title))
+        self.next_slide()
+        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        self.play(Write(sol_label))
+
+class Ex24(Slide):
+    def construct(self):
+        myBaseTemplate = TexTemplate(
+            documentclass="\documentclass[preview]{standalone}"
+        )
+        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
+
+        ex_title = Tex("\\justifying {Example 18: Point charges $Q_1 = 2.0\ \mu$C and $Q_2 = 4.0\ \mu$C are located at $\\vec{r}_1=\\left( 4\hat{i}-2\hat{j}+5\hat{k}\\right)$m and  $\\vec{r}_2=\\left( 8\hat{i}+5\hat{j}-9\hat{k}\\right)$m. What is the force of $Q_2$ on $Q_1$ ? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        self.play(Write(ex_title))
+        self.next_slide()
+        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        self.play(Write(sol_label))
+
+class Ex25(Slide):
+    def construct(self):
+        myBaseTemplate = TexTemplate(
+            documentclass="\documentclass[preview]{standalone}"
+        )
+        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
+
+        ex_title = Tex("\\justifying {Example 19: A charge $q = 2.0\ \mu$C is placed at the point P shown below. What is the force on $q$? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        img = ImageMobject('ex25.png').scale(0.6).next_to(ex_title,DOWN)
+        self.play(Write(ex_title))
+        self.play(FadeIn(img))
+        self.next_slide()
+        sol_label =Tex('Solution :', color=ORANGE).next_to(img,DOWN).to_edge(LEFT).scale(0.8)
+        self.play(Write(sol_label))
+
+class Ex26(Slide):
+    def construct(self):
+        myBaseTemplate = TexTemplate(
+            documentclass="\documentclass[preview]{standalone}"
+        )
+        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
+
+        ex_title = Tex("\\justifying {Example 20: Two charges $+3\ \mu$C and $+12\ \mu$C are fixed 1 m apart, with the second one to the right. Find the magnitude and direction of the net force on a $-2$ nC charge when placed at the following locations: (a) halfway between the two (b) half a meter to the left of the $+3\ \mu$C charge (c) half a meter above the $+12\ \mu$C charge in a direction perpendicular to the line joining the two fixed charges? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        self.play(Write(ex_title))
+        self.next_slide()
+        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        self.play(Write(sol_label))
+
+class Ex27(Slide):
+    def construct(self):
+        myBaseTemplate = TexTemplate(
+            documentclass="\documentclass[preview]{standalone}"
+        )
+        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
+
+        ex_title = Tex("\\justifying {Example 21: The charges $q_1 = 2.0 \\times 10^{-7}$ C, $q_2 = -4.0 \\times 10^{-7}$ C, and $q_3 = -1.0 \\times 10^{-7}$ C are placed at the corners of the triangle shown below. What is the force on $q_1$ ? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        img = ImageMobject('ex27.png').scale(0.5).next_to(ex_title,DR).to_edge(RIGHT)
+        self.play(Write(ex_title))
+        self.play(FadeIn(img))
+        self.next_slide()
+        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        self.play(Write(sol_label))
