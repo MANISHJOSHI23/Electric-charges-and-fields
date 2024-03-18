@@ -1328,6 +1328,30 @@ class Ex23(Slide):
         self.next_slide()
         sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
         self.play(Write(sol_label))
+        self.next_slide()
+        q1=Dot(color=YELLOW).shift(0.9*LEFT)
+        q1_text=Tex('$q_1$').next_to(q1,DOWN,buff=0).scale(0.5)
+        q2=Dot(color=ORANGE).shift(3*RIGHT)
+        q2_text=Tex('$q_2$').next_to(q2,DOWN,buff=0).scale(0.5)
+        q3=Dot(color=RED).shift(1.5*RIGHT)
+        q3_text=Tex('$q_3$').next_to(q3,DOWN,buff=0).scale(0.5)
+        arrow = DoubleArrow(q1.get_center(),q2.get_center(), tip_length=0.2, color=YELLOW,buff=0).shift(0.7*DOWN)
+        arrow_text=Tex('$1$ m').next_to(arrow,UP,buff=0).scale(0.5)
+        f1_arrow = Arrow(start=q3.get_right(),end=q3.get_right()+[0.35,0,0],buff=0,color=GREEN_D) 
+        f1_tex=Tex('$F_{31}$').next_to(f1_arrow,UP,buff=0).scale(0.5)
+        f2_arrow = Arrow(start=q3.get_right(),end=q3.get_right()+[0.8,0,0],buff=0,color=ORANGE)
+        f2_tex=Tex('$F_{32}$').next_to(f2_arrow,UP,buff=0).scale(0.5)
+        g1 = VGroup(q1,q2,q3,q1_text,q2_text,q3_text,arrow,arrow_text,f1_arrow, f1_tex,f2_tex,f2_arrow)
+        list3 =  LatexItems( r"\item Given: $q_1=50\ \mu$ C $=50\times 10^{-6}$ C", r"\item $q_2=-25\ \mu$ C $=-25\times 10^{-6}$ C", r"\item  $q_3=20\ \mu$ C $=20\times 10^{-6}$ C", r"\item  $|r_{13}|=1$ m", r"\item  $\therefore |r_{12}|=|r_{13}|=0.5$ m", r"\item Find: Force on charge $q_3$, $F_3=?$",
+                            itemize="itemize" ,page_width="20em").scale(0.7)
+        self.next_slide()
+        Group(list3,g1).arrange(RIGHT,buff=0.1).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
+        self.play(Create(g1))
+        self.next_slide()
+        for item in list3:
+            self.play(Write(item))
+            self.next_slide()
+
 
 class Ex24(Slide):
     def construct(self):
