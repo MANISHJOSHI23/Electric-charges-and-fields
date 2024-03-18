@@ -808,7 +808,6 @@ class Coulm_Vec(Slide):
         self.play(Write(list4[1]))
         self.next_slide()
         self.play(Write(list4[2]))
-
         
 class Ex9(Slide):
     def construct(self):
@@ -905,7 +904,7 @@ class Ex12(Slide):
         )
         myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
 
-        ex_title = Tex('\\justifying {Example 10: There are two charges $+2 \ \mu$ C and $-3\ \mu$C. The ratio of forces acting on them will be  }',tex_template=myBaseTemplate, color=BLUE_C).to_edge(UL).scale(0.8)
+        ex_title = Tex('\\justifying {Example 10: There are two charges $+2 \ \mu$ C and $-3\ \mu$C. The ratio of forces acting on them will be  }',tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
         op = VGroup(Tex('(a) $2:3$').scale(0.7),Tex('(b) $1:1$ ').scale(0.7),Tex('(c) $3:2$').scale(0.7),Tex('(d) $4:9$').scale(0.7) ).arrange_in_grid(2,2,buff=(4,0.3),col_alignments='ll').next_to(ex_title,DOWN)
         self.play(Write(ex_title))
         self.next_slide()
@@ -1329,26 +1328,36 @@ class Ex23(Slide):
         sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
         self.play(Write(sol_label))
         self.next_slide()
-        q1=Dot(color=YELLOW).shift(0.9*LEFT)
+        q1=Dot(color=YELLOW)
         q1_text=Tex('$q_1$').next_to(q1,DOWN,buff=0).scale(0.5)
-        q2=Dot(color=ORANGE).shift(3*RIGHT)
+        q2=Dot(color=ORANGE).shift(4*RIGHT)
         q2_text=Tex('$q_2$').next_to(q2,DOWN,buff=0).scale(0.5)
-        q3=Dot(color=RED).shift(1.5*RIGHT)
+        q3=Dot(color=RED).shift(2*RIGHT)
         q3_text=Tex('$q_3$').next_to(q3,DOWN,buff=0).scale(0.5)
         arrow = DoubleArrow(q1.get_center(),q2.get_center(), tip_length=0.2, color=YELLOW,buff=0).shift(0.7*DOWN)
         arrow_text=Tex('$1$ m').next_to(arrow,UP,buff=0).scale(0.5)
-        f1_arrow = Arrow(start=q3.get_right(),end=q3.get_right()+[0.35,0,0],buff=0,color=GREEN_D) 
-        f1_tex=Tex('$F_{31}$').next_to(f1_arrow,UP,buff=0).scale(0.5)
-        f2_arrow = Arrow(start=q3.get_right(),end=q3.get_right()+[0.8,0,0],buff=0,color=ORANGE)
-        f2_tex=Tex('$F_{32}$').next_to(f2_arrow,UP,buff=0).scale(0.5)
+        f1_arrow = Arrow(start=q3.get_right(),end=q3.get_right()+[0.8,0,0],buff=0,color=GREEN_D) 
+        f1_tex=Tex('$\\vec{F}_{31}$').next_to(f1_arrow,UR,buff=0).scale(0.5)
+        f2_arrow = Arrow(start=q3.get_right(),end=q3.get_right()+[0.4,0,0],buff=0,color=ORANGE,max_tip_length_to_length_ratio=0.5,max_stroke_width_to_length_ratio=10)
+        f2_tex=Tex('$\\vec{F}_{32}$').next_to(f2_arrow,UP,buff=0).scale(0.5)
         g1 = VGroup(q1,q2,q3,q1_text,q2_text,q3_text,arrow,arrow_text,f1_arrow, f1_tex,f2_tex,f2_arrow)
-        list3 =  LatexItems( r"\item Given: $q_1=50\ \mu$ C $=50\times 10^{-6}$ C", r"\item $q_2=-25\ \mu$ C $=-25\times 10^{-6}$ C", r"\item  $q_3=20\ \mu$ C $=20\times 10^{-6}$ C", r"\item  $|r_{13}|=1$ m", r"\item  $\therefore |r_{12}|=|r_{13}|=0.5$ m", r"\item Find: Force on charge $q_3$, $F_3=?$",
-                            itemize="itemize" ,page_width="20em").scale(0.7)
-        self.next_slide()
-        Group(list3,g1).arrange(RIGHT,buff=0.1).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
+        list3 =  LatexItems( r"\item Given: $q_1=50\ \mu$ C $=50\times 10^{-6}$ C", r"\item $q_2=-25\ \mu$ C $=-25\times 10^{-6}$ C", r"\item  $q_3=20\ \mu$ C $=20\times 10^{-6}$ C", r"\item  $|\vec{r}_{12}|=1$ m", r"\item  $\therefore |\vec{r}_{31}|=|\vec{r}_{32}|=0.5$ m", r"\item Find: Force on charge $q_3$, $F_3=?$",r"\item In the fig. forces $\vec{F}_{31}$ and $\vec{F}_{32}$ are\\ acting in the same direction.",
+                            itemize="itemize" ,page_width="20em").scale(0.65)
+        
+        list4 =  LatexItems( r"\item $\therefore $ The magnitude of $\vec{F}_3$ \[|\vec{F}_3|=|\vec{F}_{31}|+|\vec{F}_{32}|=\dfrac{q_3}{4\pi\epsilon_0}\left[\dfrac{q_1}{|\vec{r}_{31}|^2}+\dfrac{q_2}{|\vec{r}_{32}|^2}\right]\] \[|\vec{F}_3|=9\times 10^{9}\times 20\times 10^{-6}\left[\dfrac{50\times 10^{-6}}{(5\times10^{-1})^2}+\dfrac{25\times 10^{-6}}{(5\times10^{-1})^2}\right]\] \[|\vec{F}_3|=180\times 10^{3}\left[\dfrac{75\times 10^{-6}}{25\times10^{-2}}\right]= 18\times 10^{4}\times 3\times 10^{-4}=54\ N\]",
+                            itemize="itemize" ,page_width="25em").scale(0.65)
+        self.next_slide
+        g2 = Group(g1,list4).arrange(DOWN,buff=0.1).next_to(list3,RIGHT)
+        line = Line(g2.get_top(),g2.get_bottom(),color=RED).next_to(list3,RIGHT)
+        Group(list3,line,g2).arrange(RIGHT,buff=0.1).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
         self.play(Create(g1))
         self.next_slide()
         for item in list3:
+            self.play(Write(item))
+            self.next_slide()
+        
+        self.play(Create(line))
+        for item in list4:
             self.play(Write(item))
             self.next_slide()
 
@@ -1361,10 +1370,27 @@ class Ex24(Slide):
         myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
 
         ex_title = Tex("\\justifying {Example 18: Point charges $Q_1 = 2.0\ \mu$C and $Q_2 = 4.0\ \mu$C are located at $\\vec{r}_1=\\left( 4\hat{i}-2\hat{j}+5\hat{k}\\right)$m and  $\\vec{r}_2=\\left( 8\hat{i}+5\hat{j}-9\hat{k}\\right)$m. What is the force of $Q_2$ on $Q_1$ ? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        list3 =  LatexItems( r"\item Given: $Q_1=2\ \mu$ C $=2\times 10^{-6}$ C", r"\item $Q_2=45\ \mu$ C $=4\times 10^{-6}$ C", r"\item  $\vec{r}_{1}=\left( 4\hat{i}-2\hat{j}+5\hat{k}\right)$ m ", r"\item  $\vec{r}_2=\left( 8\hat{i}+5\hat{j}-9\hat{k}\right)$m", r"\item Find: Force on charge $Q_1$ \\due to $Q_2$, $\vec{F}_{12}=?$", r"\item $\vec{F}_{12}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q_1Q_2}{|\vec{r}_{12}|^2}\ \hat{r}_{12}$",
+                            itemize="itemize" ,page_width="20em").scale(0.65).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
+        list4 =  LatexItems(r"\item $\vec{r}_{12}= \vec{r}_1-\vec{r}_2= \left( 4\hat{i}-2\hat{j}+5\hat{k}\right)$ m $-\left( 8\hat{i}+5\hat{j}-9\hat{k}\right)$ m ",r"\item  $\vec{r}_{12}= (-4\ \hat{i} -7\ \hat{j} +14\ \hat{k})$ m", r"\item $|\vec{r}_{12}|=\sqrt{(-4)^2+(-7)^2+(14)^2}=\sqrt{261}$ m ",r"\item $\hat{r}_{12}=\dfrac{\vec{r}_{12}}{|\vec{r}_{12}|}=\dfrac{(-4\ \hat{i} -7\ \hat{j} +14\ \hat{k})}{\sqrt{261}}$",r"\item $\vec{F}_{12}=9\times 10^{9}\times \dfrac{2\times 10^{-6}\times 4\times 10^{-6}}{261}\dfrac{(-4\ \hat{i} -7\ \hat{j} +14\ \hat{k})}{\sqrt{261}}$",r"\item  $\vec{F}_{12}=72\times 10^{-3}\times \dfrac{(-4\ \hat{i} -7\ \hat{j} +14\ \hat{k})}{261\times\sqrt{261}}$",
+                            itemize="itemize" ,page_width="30em").scale(0.65)
+        line = Line(list4.get_top(),list4.get_bottom(),color=RED).next_to(list3,RIGHT)
+        g1 = Group(sol_label,list3).next_to(ex_title,DOWN).to_edge(LEFT)
+        Group(g1,line,list4).arrange(RIGHT,buff=0.1).next_to(ex_title,DOWN).shift(RIGHT).to_corner(LEFT)
         self.play(Write(ex_title))
         self.next_slide()
-        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
         self.play(Write(sol_label))
+        self.next_slide()
+        for item in list3:
+            self.play(Write(item))
+            self.next_slide()
+        
+        self.play(Create(line))
+        for item in list4:
+            self.play(Write(item))
+            self.next_slide()
+
 
 class Ex25(Slide):
     def construct(self):
@@ -1373,13 +1399,50 @@ class Ex25(Slide):
         )
         myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
 
-        ex_title = Tex("\\justifying {Example 19: A charge $q = 2.0\ \mu$C is placed at the point P shown below. What is the force on $q$? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        ex_title = Tex("\\justifying {Example 19: A charge $q_3 = 2.0\ \mu$C is placed at the point P shown below. What is the force on $q_3$? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
         img = ImageMobject('ex25.png').scale(0.6).next_to(ex_title,DOWN)
         self.play(Write(ex_title))
         self.play(FadeIn(img))
         self.next_slide()
         sol_label =Tex('Solution :', color=ORANGE).next_to(img,DOWN).to_edge(LEFT).scale(0.8)
         self.play(Write(sol_label))
+        self.next_slide()
+        q1=Dot(color=YELLOW)
+        q1_text=Tex('$q_1$').next_to(q1,DOWN,buff=0).scale(0.5)
+        q2=Dot(color=ORANGE).shift(2.6*RIGHT)
+        q2_text=Tex('$q_2$').next_to(q2,DOWN,buff=0).scale(0.5)
+        q3=Dot(color=RED).shift(3.9*RIGHT)
+        q3_text=Tex('$q_3$').next_to(q3,DOWN,buff=0).scale(0.5)
+        arrow = DoubleArrow(q1.get_center(),q2.get_center(), tip_length=0.2, color=YELLOW,buff=0).shift(0.7*DOWN)
+        arrow_text=Tex('2 m').next_to(arrow,UP,buff=0).scale(0.5)
+        arrow2 = DoubleArrow(q2.get_center(),q3.get_center(), tip_length=0.2, color=YELLOW,buff=0).shift(0.7*DOWN)
+        arrow2_text=Tex('1 m').next_to(arrow2,UP,buff=0).scale(0.5)
+        f1_arrow = Arrow(start=q3.get_right(),end=q3.get_right()+[0.4,0,0],buff=0,color=GREEN_D,max_tip_length_to_length_ratio=0.5,max_stroke_width_to_length_ratio=10) 
+        f1_tex=Tex('$\\vec{F}_{31}$').next_to(f1_arrow,UR,buff=0).scale(0.5)
+        f2_arrow = Arrow(start=q3.get_right(),end=q3.get_right()-[0.8,0,0],buff=0,color=ORANGE)
+        f2_tex=Tex('$\\vec{F}_{32}$').next_to(f2_arrow,UP,buff=0).scale(0.5)
+        g1 = VGroup(q1,q2,q3,q1_text,q2_text,q3_text,arrow,arrow_text,arrow2,arrow2_text,f1_arrow, f1_tex,f2_tex,f2_arrow)
+        list3 =  LatexItems( r"\item Given: $q_1=1\ \mu$ C $=10^{-6}$ C", r"\item $q_2=-3\ \mu$ C $=-3\times 10^{-6}$ C", r"\item  $q_3=2\ \mu$ C $=2\times 10^{-6}$ C", r"\item  $|\vec{r}_{31}|=3$ m,\ $|\vec{r}_{32}|=1$ m", r"\item Find: Force on charge $q_3$, $F_3=?$",r"\item In the fig. forces $\vec{F}_{31}$ and $\vec{F}_{32}$ are\\ acting in the opposite direction.",
+                            itemize="itemize" ,page_width="20em").scale(0.65)
+        
+        list4 =  LatexItems( r"\item $\therefore $ The magnitude of $\vec{F}_3$ \[|\vec{F}_3|=|\vec{F}_{32}|-|\vec{F}_{31}|=\dfrac{q_3}{4\pi\epsilon_0}\left[\dfrac{q_2}{|\vec{r}_{32}|^2}+\dfrac{q_1}{|\vec{r}_{31}|^2}\right]\] \[|\vec{F}_3|=9\times 10^{9}\times 2\times 10^{-6}\left[\dfrac{3\times 10^{-6}}{(1)^2}+\dfrac{ 10^{-6}}{(2)^2}\right]\] \[|\vec{F}_3|=18\times 10^{3}\left[3-\dfrac{1}{4}\right]\times 10^{-6}= 18\times 10^{-3}\times \dfrac{11}{4}\]",r"\item $|\vec{F}_3|=49.5\times 10^{-3}$ N (Along -ve x-axis)",
+                            itemize="itemize" ,page_width="25em").scale(0.65)
+        self.next_slide
+        g2 = Group(img,g1).arrange(RIGHT,buff=0.1).next_to(ex_title,DOWN)
+        line = Line(list4.get_top(),list4.get_bottom(),color=RED).next_to(list3,RIGHT)
+        Group(list3,line,list4).arrange(RIGHT,buff=0.1).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
+        self.play(Create(g1))
+        self.next_slide()
+        for item in list3:
+            self.play(Write(item))
+            self.next_slide()
+        
+        self.play(Create(line))
+        for item in list4:
+            self.play(Write(item))
+            self.next_slide()
+
+
 
 class Ex26(Slide):
     def construct(self):
@@ -1407,4 +1470,77 @@ class Ex27(Slide):
         self.play(FadeIn(img))
         self.next_slide()
         sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
-        self.play(Write(sol_label))
+        self.play(Write(sol_label)) 
+
+class Ex28(Slide):
+    def construct(self):
+        myBaseTemplate = TexTemplate(
+            documentclass="\documentclass[preview]{standalone}"
+        )
+        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
+
+        ex_title = Tex("\\justifying {Example 22: Two fixed charges $+4q$ and $+1q$ are at a distance 3 m apart. At what point between the charges, a third charge $+q$ must be placed to keep it in equilibrium? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        self.play(Write(ex_title))
+        self.next_slide()
+        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        self.play(Write(sol_label))         
+
+
+class Ex29(Slide):
+    def construct(self):
+        myBaseTemplate = TexTemplate(
+            documentclass="\documentclass[preview]{standalone}"
+        )
+        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
+
+        ex_title = Tex("\\justifying {Example 23: Four charges $Q,\ q,\ Q,$ and $q$ are kept at the four corners of a square as shown below. What is the relation between $Q$ and $q$ so that the net force on a charge $q$ is zero. }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        self.play(Write(ex_title))
+        self.next_slide()
+        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        self.play(Write(sol_label)) 
+
+
+class Ex30(Slide):
+    def construct(self):
+        myBaseTemplate = TexTemplate(
+            documentclass="\documentclass[preview]{standalone}"
+        )
+        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
+
+        ex_title = Tex("\\justifying {Example 24: Find the force on the charge $q$ kept at the centre of a square of side 'd'. The charges on the four corners of the square aare $Q,\ 2Q,\ 3Q,$ and $4Q$ respectively as shown in the figure below:}",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        self.play(Write(ex_title))
+        self.next_slide()
+        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        self.play(Write(sol_label)) 
+
+
+class Ex31(Slide):
+    def construct(self):
+        myBaseTemplate = TexTemplate(
+            documentclass="\documentclass[preview]{standalone}"
+        )
+        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
+
+        ex_title = Tex("\\justifying {Example 1.6:  Consider three charges $q_1,\ q_2,\ q_3$ each equal to $q$ at the vertices of an equilateral triangle of side $l$. What is the force on a charge $Q$ (with the same sign as $q$) placed at the centroid of the triangle, as shown in Fig.? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        img = ImageMobject('Ex31.png').scale(0.6).next_to(ex_title,DR).to_edge(RIGHT)
+        self.play(Write(ex_title))
+        self.play(FadeIn(img))
+        self.next_slide()
+        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        self.play(Write(sol_label)) 
+
+
+class Ex32(Slide):
+    def construct(self):
+        myBaseTemplate = TexTemplate(
+            documentclass="\documentclass[preview]{standalone}"
+        )
+        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
+
+        ex_title = Tex("\\justifying {Example 1.7:  Consider the charges $q,\ q,$ and $-q$ placed at the vertices of an equilateral triangle, as shown in Fig. . What is the force on each charge? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        img = ImageMobject('Ex32.png').scale(0.6).next_to(ex_title,DR).to_edge(RIGHT)
+        self.play(Write(ex_title))
+        self.play(FadeIn(img))
+        self.next_slide()
+        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        self.play(Write(sol_label)) 
