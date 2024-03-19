@@ -1425,7 +1425,7 @@ class Ex25(Slide):
         list3 =  LatexItems( r"\item Given: $q_1=1\ \mu$ C $=10^{-6}$ C", r"\item $q_2=-3\ \mu$ C $=-3\times 10^{-6}$ C", r"\item  $q_3=2\ \mu$ C $=2\times 10^{-6}$ C", r"\item  $|\vec{r}_{31}|=3$ m,\ $|\vec{r}_{32}|=1$ m", r"\item Find: Force on charge $q_3$, $F_3=?$",r"\item In the fig. forces $\vec{F}_{31}$ and $\vec{F}_{32}$ are\\ acting in the opposite direction.",
                             itemize="itemize" ,page_width="20em").scale(0.65)
         
-        list4 =  LatexItems( r"\item $\therefore $ The magnitude of $\vec{F}_3$ \[|\vec{F}_3|=|\vec{F}_{32}|-|\vec{F}_{31}|=\dfrac{q_3}{4\pi\epsilon_0}\left[\dfrac{q_2}{|\vec{r}_{32}|^2}+\dfrac{q_1}{|\vec{r}_{31}|^2}\right]\] \[|\vec{F}_3|=9\times 10^{9}\times 2\times 10^{-6}\left[\dfrac{3\times 10^{-6}}{(1)^2}+\dfrac{ 10^{-6}}{(2)^2}\right]\] \[|\vec{F}_3|=18\times 10^{3}\left[3-\dfrac{1}{4}\right]\times 10^{-6}= 18\times 10^{-3}\times \dfrac{11}{4}\]",r"\item $|\vec{F}_3|=49.5\times 10^{-3}$ N (Along -ve x-axis)",
+        list4 =  LatexItems( r"\item $\therefore $ The magnitude of $\vec{F}_3$ \[|\vec{F}_3|=|\vec{F}_{32}|-|\vec{F}_{31}|=\dfrac{q_3}{4\pi\epsilon_0}\left[\dfrac{q_2}{|\vec{r}_{32}|^2}+\dfrac{q_1}{|\vec{r}_{31}|^2}\right]\] \[|\vec{F}_3|=9\times 10^{9}\times 2\times 10^{-6}\left[\dfrac{3\times 10^{-6}}{(1)^2}+\dfrac{ 10^{-6}}{(3)^2}\right]\] \[|\vec{F}_3|=18\times 10^{3}\left[3-\dfrac{1}{9}\right]\times 10^{-6}= 18\times 10^{-3}\times \dfrac{28}{9}\]",r"\item $|\vec{F}_3|=56\times 10^{-3}$ N (Along -ve x-axis)",
                             itemize="itemize" ,page_width="25em").scale(0.65)
         self.next_slide
         g2 = Group(img,g1).arrange(RIGHT,buff=0.1).next_to(ex_title,DOWN)
@@ -1455,7 +1455,37 @@ class Ex26(Slide):
         self.play(Write(ex_title))
         self.next_slide()
         sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        list3 =  LatexItems( r"\item Given: $q_1=+3\ \mu$ C $=3\times 10^{-6}$ C", r"\item $q_2=+12\ \mu$ C $=12\times 10^{-6}$ C", r"\item  $q_3=-2\ $ nC $=-2\times 10^{-9}$ C", r"\item  $|\vec{r}_{12}|=1$ m",r"\item (a) $|\vec{r}_{32}|=|\vec{r}_{31}|=0.5$ m", r"\item $|\vec{F}_{31}|=2.16\times 10^{-4}$ N (to the left)", r"\item $|\vec{F}_{32}|=8.63\times 10^{-4}$ N (to the right)",
+                            itemize="itemize" ,page_width="20em").scale(0.65)
+        
+        list4 =  LatexItems(  r"\item $|\vec{F}_{net}|=6.47\times 10^{-4}$ N (to the right)",r"\item (b) $|\vec{r}_{32}|=1.5$ m , $ |\vec{r}_{31}|=0.5$ m", r"\item $|\vec{F}_{31}|=2.16\times 10^{-4}$ N (to the right)", r"\item $|\vec{F}_{32}|=0.96\times 10^{-4}$ N (to the right)", r"\item $|\vec{F}_{net}|=3.12\times 10^{-4}$ N (to the right)",
+                            itemize="itemize" ,page_width="25em").scale(0.65)
+        line = Line(list4.get_top(),list4.get_bottom(),color=RED).next_to(list3,RIGHT)
+        g1 = Group(sol_label,list3).arrange(DOWN,buff=0.1).next_to(ex_title,DOWN).to_edge(LEFT)
+        Group(g1,line,list4).arrange(RIGHT,buff=0.1).next_to(ex_title,DOWN).shift(RIGHT).to_corner(LEFT)
         self.play(Write(sol_label))
+        self.next_slide()
+        for item in list3:
+            self.play(Write(item))
+            self.next_slide()
+        
+        self.play(Create(line))
+        for item in list4:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.next_slide()
+        self.play(ReplacementTransform(list3,list4))
+
+        list5 =  LatexItems(r"\item  (c) $\vec{F}_{31}=-3.86\times 10^{-5}\ \hat{i}-0.193\times 10^{-5}\ \hat{j}$ N ", r"\item  $\vec{F}_{31}=-8.63\times 10^{-5}\ \hat{j}$ N ", r"\item  $\vec{F}_{net}=-3.86\times 10^{-5}\ \hat{i}-8.82\times 10^{-5}\ \hat{j}$ N ",
+                            itemize="itemize" ,page_width="25em").scale(0.65)
+        
+        g2 = Group(sol_label,list4).arrange(DOWN,buff=0.1).next_to(ex_title,DOWN).to_edge(LEFT)
+        Group(g2,line,list5).arrange(RIGHT,buff=0.1).next_to(ex_title,DOWN).shift(RIGHT).to_corner(LEFT)
+        for item in list5:
+            self.play(Write(item))
+            self.next_slide()
+        
 
 class Ex27(Slide):
     def construct(self):
@@ -1473,7 +1503,7 @@ class Ex27(Slide):
         list3 =  LatexItems( r"\item  Let us cosinder the origin at $q_3$", r"\item Position Vector of $q_1, q_2,$ and $q_3$ \\ $\vec{r}_1 = 0\ \hat{i} + 3\ \hat{j}$ \\ $\vec{r}_2 = 4\ \hat{i} + 0\ \hat{j}$ \\ $\vec{r}_3 = 0\ \hat{i} + 0\ \hat{j}$",r"\item $\vec{r}_{12}=\vec{r}_{1}-\vec{r}_2 = -4\ \hat{i} + 3\ \hat{j}$",r"\item $\vec{r}_{13}=\vec{r}_{1}-\vec{r}_3 = 0\ \hat{i} + 3\ \hat{j}$",r"\item $|\vec{r}_{12}|=\sqrt{(-4)^2+3^2}=\sqrt{25}=5$",r"\item $|\vec{r}_{13}|=\sqrt{(0)^2+3^2}=\sqrt{9}=3$",
                             itemize="itemize" ,page_width="20em").scale(0.65).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
         list4 =  LatexItems(r"\item $\hat{r}_{12}=\dfrac{\vec{r}_{12}}{|\vec{r}_{12}|}=\dfrac{-4\ \hat{i} + 3\ \hat{j}}{5}$",
-                            r"\item $\hat{r}_{13}=\dfrac{\vec{r}_{13}}{|\vec{r}_{13}|}=\dfrac{0\ \hat{i} + 3\ \hat{j}}{3}$\\ \\ $\hat{r}_{13}=\hat{i}$",r"\item $\vec{F}_{1}=\vec{F}_{12}+\vec{F}_{13}=\dfrac{q_1}{4\pi\epsilon_0}\left[\dfrac{q_2}{|\vec{r}_{12}|^2}\ \hat{r}_{12}+\dfrac{q_3}{|\vec{r}_{13}|^2}\ \hat{r}_{13}\right]$",
+                            r"\item $\hat{r}_{13}=\dfrac{\vec{r}_{13}}{|\vec{r}_{13}|}=\dfrac{0\ \hat{i} + 3\ \hat{j}}{3}$\\ \\ $\hat{r}_{13}=\hat{j}$",r"\item $\vec{F}_{1}=\vec{F}_{12}+\vec{F}_{13}=\dfrac{q_1}{4\pi\epsilon_0}\left[\dfrac{q_2}{|\vec{r}_{12}|^2}\ \hat{r}_{12}+\dfrac{q_3}{|\vec{r}_{13}|^2}\ \hat{r}_{13}\right]$",
                             itemize="itemize" ,page_width="30em").scale(0.65)
         line = Line(list4.get_top(),list4.get_bottom(),color=RED).next_to(list3,RIGHT)
         g1 = Group(sol_label,list3).next_to(ex_title,DOWN).to_edge(LEFT)
@@ -1516,6 +1546,71 @@ class Ex29(Slide):
         self.next_slide()
         sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
         self.play(Write(sol_label)) 
+        self.next_slide()
+        sq= Square(2,color=RED)
+        q1=Dot(color=BLUE).move_to(sq.get_corner(UL))
+        q1_text=Tex('$Q$').next_to(q1,UP,buff=0).scale(0.7)
+        q2=Dot(color=GREEN).move_to(sq.get_corner(UR))
+        q2_text=Tex('$q$').next_to(q2,UP,buff=0).scale(0.7)
+        q3=Dot(color=BLUE).move_to(sq.get_corner(DR))
+        q3_text=Tex('$Q$').next_to(q3,DOWN,buff=0).scale(0.7)
+        q4=Dot(color=GREEN).move_to(sq.get_corner(DL))
+        q4_text=Tex('$q$').next_to(q4,DOWN,buff=0).scale(0.7)
+        arrow = DoubleArrow(q1.get_center(),q4.get_center(), tip_length=0.2, color=YELLOW,buff=0).shift(0.7*LEFT)
+        arrow_text=Tex('a').next_to(arrow,LEFT,buff=0).scale(0.5)
+        dia = Line(q4.get_center(),q2.get_center(),color=RED)
+        f1_arrow = Arrow(start=q2.get_center(),end=q2.get_center()+[0.8,0,0],buff=0,color=GREEN_D) 
+        f1_tex=Tex('$\\vec{F}_{21}$').next_to(f1_arrow,RIGHT,buff=0).scale(0.5)
+        f2_arrow = Arrow(start=q2.get_center(),end=q2.get_center()+[0,0.8,0],buff=0,color=GREEN_D) 
+        f2_tex=Tex('$\\vec{F}_{23}$').next_to(f2_arrow,UP,buff=0).scale(0.5)
+        f3_arrow = Arrow(start=q2.get_center(),end=q2.get_center()+[0.6,0.6,0],buff=0,color=YELLOW) 
+        f3_tex=Tex('$\\vec{F}_{24}$').next_to(f3_arrow,RIGHT,buff=0).scale(0.5)
+
+        f11_arrow = Arrow(start=q2.get_center(),end=q2.get_center()-[0.8,0,0],buff=0,color=GREEN_D) 
+        f11_tex=Tex('$\\vec{F}_{21}$').next_to(f11_arrow,LEFT,buff=0).scale(0.5)
+        f22_arrow = Arrow(start=q2.get_center(),end=q2.get_center()-[0,0.8,0],buff=0,color=GREEN_D) 
+        f22_tex=Tex('$\\vec{F}_{23}$').next_to(f22_arrow,DR,buff=0).scale(0.5)
+        f33_arrow = Arrow(start=q2.get_center(),end=q2.get_center()+[0.6,0.6,0],buff=0,color=YELLOW) 
+        f33_tex=Tex('$\\vec{F}_{24}$').next_to(f33_arrow,RIGHT,buff=0).scale(0.5)
+        g1 = VGroup(sq,q1,q1_text,q2,q2_text,q3,q3_text,q4,q4_text,arrow,arrow_text,dia,f1_arrow,f1_tex,f1_arrow,f2_tex,f2_arrow,f3_tex,f3_arrow,f11_arrow,f11_tex,f22_arrow,f22_tex,f33_arrow,f33_tex).next_to(ex_title,DOWN).to_edge(RIGHT).shift(0.4*UP)
+        self.play(Create(g1[0:12]))
+        list3 =  LatexItems( r"\item Case 1: $Q$ and $q$ are of same sign",r"\item This case is not possible since the forces never cancel out each other.",r"\item Case 2: $Q$ and $q$ are of opposite sign",r"\item $\vec{F}_{21}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Qq}{a^2}\ (-\hat{i})$",r"\item $\vec{F}_{23}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Qq}{a^2}\ (-\hat{j})$",r"\item $\vec{F}_{24}=\dfrac{1}{4\pi\epsilon_0}\dfrac{qq}{2a^2}\ (\hat{i}+\hat{j})$",
+                            itemize="itemize" ,page_width="18em").scale(0.65)
+        
+        list4 =  LatexItems( r"\item $\vec{F}_{net}=\vec{F}_{21}+\vec{F}_{23}+\vec{F}_{24}$",
+                            r"\item $\vec{F}_{net}=\dfrac{q}{4\pi\epsilon_0}\left[-\dfrac{Q}{a^2}\ \hat{i}-\dfrac{Q}{a^2}\ \hat{j}+\dfrac{q}{2a^2}\ (\hat{i}+\hat{j})\right]$",
+                            r"\item $\vec{F}_{net}=\dfrac{q}{4\pi\epsilon_0\times a^2}\left[-2Q\ \hat{i}-2Q\ \hat{j}+q\hat{i}+q\hat{j}\right]$",
+                            r"\item $0=\dfrac{q}{4\pi\epsilon_0\times a^2}\left[(q-2Q)\ \hat{i}+(q-2Q)\ \hat{j}\right]\quad (\because \vec{F}_{net}=0)$",
+                            r"\item $(q-2Q)\ \hat{i}+(q-2Q)\ \hat{j}$",r"\item $q-2Q=0$ OR $q=2Q$ \\ $\therefore$ $Q$ and $q$ must have opposite sign and $q=2Q$",
+                            itemize="itemize" ,page_width="27em").scale(0.65)
+        self.next_slide()
+        #g2 = Group(g1,list4).arrange(DOWN).next_to(ex_title,DOWN).to_edge(RIGHT)
+        line = Line(list3.get_top(),list3.get_bottom(),color=RED).next_to(list3,RIGHT)
+        Group(list3,line,list4).arrange(RIGHT,buff=0.1).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
+        self.next_slide()
+        self.play(Write(list3[0]))
+        self.play(Create(g1[12:18]))
+        self.next_slide()
+        self.play(Write(list3[1]))
+        self.play(FadeOut(g1[12:18]))
+        self.next_slide()
+        self.play(Write(list3[2]))
+        self.play(Create(g1[18:25]))
+        self.next_slide()
+        self.play(Write(list3[3]))
+        self.next_slide()
+        self.play(Write(list3[4]))
+        self.next_slide()
+        self.play(Write(list3[5]))
+        self.next_slide()
+        
+        
+        self.play(Create(line))
+        self.play(FadeOut(g1))
+        for item in list4:
+            self.play(Write(item))
+            self.next_slide()
+
 
 
 class Ex30(Slide):
@@ -1530,6 +1625,31 @@ class Ex30(Slide):
         self.next_slide()
         sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
         self.play(Write(sol_label)) 
+        self.next_slide()
+        sq= Square(3,color=RED)
+        q1=Dot(color=BLUE).move_to(sq.get_corner(UL))
+        q1_text=Tex('$Q$').next_to(q1,UP,buff=0).scale(0.7)
+        q2=Dot(color=GREEN).move_to(sq.get_corner(UR))
+        q2_text=Tex('$2Q$').next_to(q2,UP,buff=0).scale(0.7)
+        q3=Dot(color=BLUE).move_to(sq.get_corner(DR))
+        q3_text=Tex('$3Q$').next_to(q3,DOWN,buff=0).scale(0.7)
+        q4=Dot(color=GREEN).move_to(sq.get_corner(DL))
+        q4_text=Tex('$4Q$').next_to(q4,DOWN,buff=0).scale(0.7)
+        q5=Dot(color=YELLOW).move_to(sq.get_center())
+        q5_text=Tex('$q$').next_to(q5,DOWN,buff=0).scale(0.7)
+        arrow = DoubleArrow(q1.get_center(),q4.get_center(), tip_length=0.2, color=YELLOW,buff=0).shift(0.7*LEFT)
+        arrow_text=Tex('d').next_to(arrow,LEFT,buff=0).scale(0.7)
+        #dia = Line(q4.get_center(),q2.get_center(),color=RED)
+        f1_arrow = Arrow(start=q5.get_center(),end=q5.get_center()+[0.3,-0.3,0],buff=0,tip_length=0.2,max_stroke_width_to_length_ratio=4,max_tip_length_to_length_ratio=1,stroke_width=6,color=GREEN_D) 
+        f1_tex=Tex('$\\vec{F}_{51}$').next_to(f1_arrow,DR,buff=0).scale(0.5)
+        f2_arrow = Arrow(start=q5.get_center(),end=q5.get_center()+[-0.6,-0.6,0],buff=0,tip_length=0.2,max_stroke_width_to_length_ratio=3,max_tip_length_to_length_ratio=1,stroke_width=6,color=GREEN_D) 
+        f2_tex=Tex('$\\vec{F}_{52}$').next_to(f2_arrow,DL,buff=0).scale(0.5)
+        f3_arrow = Arrow(start=q5.get_center(),end=q5.get_center()+[-0.9,0.9,0],buff=0,tip_length=0.2,max_stroke_width_to_length_ratio=2,max_tip_length_to_length_ratio=1,stroke_width=6,color=YELLOW) 
+        f3_tex=Tex('$\\vec{F}_{53}$').next_to(f3_arrow,UL,buff=0).scale(0.5)
+        f4_arrow = Arrow(start=q5.get_center(),end=q5.get_center()+[1.2,1.2,0],buff=0,tip_length=0.2,max_stroke_width_to_length_ratio=1,max_tip_length_to_length_ratio=1,stroke_width=6,color=YELLOW) 
+        f4_tex=Tex('$\\vec{F}_{54}$').next_to(f3_arrow,UR,buff=0).scale(0.5)
+        g1 = VGroup(sq,q1,q1_text,q2,q2_text,q3,q3_text,q4,q4_text,q5,q5_text,arrow,arrow_text,f1_arrow,f1_tex,f1_arrow,f2_tex,f2_arrow,f3_tex,f3_arrow,f4_arrow,f4_tex).next_to(ex_title,DOWN).to_edge(RIGHT).shift(0.4*UP)
+        self.play(Write(g1))
 
 
 class Ex31(Slide):
