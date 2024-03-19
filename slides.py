@@ -1470,7 +1470,25 @@ class Ex27(Slide):
         self.play(FadeIn(img))
         self.next_slide()
         sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
-        self.play(Write(sol_label)) 
+        list3 =  LatexItems( r"\item  Let us cosinder the origin at $q_3$", r"\item Position Vector of $q_1, q_2,$ and $q_3$ \\ $\vec{r}_1 = 0\ \hat{i} + 3\ \hat{j}$ \\ $\vec{r}_2 = 4\ \hat{i} + 0\ \hat{j}$ \\ $\vec{r}_3 = 0\ \hat{i} + 0\ \hat{j}$",r"\item $\vec{r}_{12}=\vec{r}_{1}-\vec{r}_2 = -4\ \hat{i} + 3\ \hat{j}$",r"\item $\vec{r}_{13}=\vec{r}_{1}-\vec{r}_3 = 0\ \hat{i} + 3\ \hat{j}$",r"\item $|\vec{r}_{12}|=\sqrt{(-4)^2+3^2}=\sqrt{25}=5$",r"\item $|\vec{r}_{13}|=\sqrt{(0)^2+3^2}=\sqrt{9}=3$",
+                            itemize="itemize" ,page_width="20em").scale(0.65).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
+        list4 =  LatexItems(r"\item $\hat{r}_{12}=\dfrac{\vec{r}_{12}}{|\vec{r}_{12}|}=\dfrac{-4\ \hat{i} + 3\ \hat{j}}{5}$",
+                            r"\item $\hat{r}_{13}=\dfrac{\vec{r}_{13}}{|\vec{r}_{13}|}=\dfrac{0\ \hat{i} + 3\ \hat{j}}{3}$\\ \\ $\hat{r}_{13}=\hat{i}$",r"\item $\vec{F}_{1}=\vec{F}_{12}+\vec{F}_{13}=\dfrac{q_1}{4\pi\epsilon_0}\left[\dfrac{q_2}{|\vec{r}_{12}|^2}\ \hat{r}_{12}+\dfrac{q_3}{|\vec{r}_{13}|^2}\ \hat{r}_{13}\right]$",
+                            itemize="itemize" ,page_width="30em").scale(0.65)
+        line = Line(list4.get_top(),list4.get_bottom(),color=RED).next_to(list3,RIGHT)
+        g1 = Group(sol_label,list3).next_to(ex_title,DOWN).to_edge(LEFT)
+        Group(g1,line,list4).arrange(RIGHT,buff=0.1).next_to(ex_title,DOWN).shift(RIGHT).to_corner(LEFT)
+        self.next_slide()
+        self.play(Write(sol_label))
+        self.next_slide()
+        for item in list3:
+            self.play(Write(item))
+            self.next_slide()
+        
+        self.play(Create(line))
+        for item in list4:
+            self.play(Write(item))
+            self.next_slide()
 
 class Ex28(Slide):
     def construct(self):
