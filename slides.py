@@ -1557,7 +1557,7 @@ class Ex29(Slide):
         q4=Dot(color=GREEN).move_to(sq.get_corner(DL))
         q4_text=Tex('$q$').next_to(q4,DOWN,buff=0).scale(0.7)
         arrow = DoubleArrow(q1.get_center(),q4.get_center(), tip_length=0.2, color=YELLOW,buff=0).shift(0.7*LEFT)
-        arrow_text=Tex('a').next_to(arrow,LEFT,buff=0).scale(0.5)
+        arrow_text=Tex('a').next_to(arrow,LEFT,buff=0).scale(0.7)
         dia = Line(q4.get_center(),q2.get_center(),color=RED)
         f1_arrow = Arrow(start=q2.get_center(),end=q2.get_center()+[0.8,0,0],buff=0,color=GREEN_D) 
         f1_tex=Tex('$\\vec{F}_{21}$').next_to(f1_arrow,RIGHT,buff=0).scale(0.5)
@@ -1574,19 +1574,18 @@ class Ex29(Slide):
         f33_tex=Tex('$\\vec{F}_{24}$').next_to(f33_arrow,RIGHT,buff=0).scale(0.5)
         g1 = VGroup(sq,q1,q1_text,q2,q2_text,q3,q3_text,q4,q4_text,arrow,arrow_text,dia,f1_arrow,f1_tex,f1_arrow,f2_tex,f2_arrow,f3_tex,f3_arrow,f11_arrow,f11_tex,f22_arrow,f22_tex,f33_arrow,f33_tex).next_to(ex_title,DOWN).to_edge(RIGHT).shift(0.4*UP)
         self.play(Create(g1[0:12]))
-        list3 =  LatexItems( r"\item Case 1: $Q$ and $q$ are of same sign",r"\item This case is not possible since the forces never cancel out each other.",r"\item Case 2: $Q$ and $q$ are of opposite sign",r"\item $\vec{F}_{21}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Qq}{a^2}\ (-\hat{i})$",r"\item $\vec{F}_{23}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Qq}{a^2}\ (-\hat{j})$",r"\item $\vec{F}_{24}=\dfrac{1}{4\pi\epsilon_0}\dfrac{qq}{2a^2}\ (\hat{i}+\hat{j})$",
-                            itemize="itemize" ,page_width="18em").scale(0.65)
+        list3 =  LatexItems( r"\item Case 1: $Q$ and $q$ are of same sign",r"\item This case is not possible since the forces never cancel out each other.",r"\item Case 2: $Q$ and $q$ are of opposite sign",r"\item $\vec{F}_{21}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Qq}{a^2}\ (-\hat{i})$",r"\item $\vec{F}_{23}=\dfrac{1}{4\pi\epsilon_0}\dfrac{Qq}{a^2}\ (-\hat{j})$",r"\item $\vec{F}_{24}=\dfrac{1}{4\pi\epsilon_0}\dfrac{qq}{2a^2}\ \dfrac{(\hat{i}+\hat{j})}{\sqrt{2}}$",
+                            itemize="itemize" ,page_width="20em").scale(0.65).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
         
         list4 =  LatexItems( r"\item $\vec{F}_{net}=\vec{F}_{21}+\vec{F}_{23}+\vec{F}_{24}$",
-                            r"\item $\vec{F}_{net}=\dfrac{q}{4\pi\epsilon_0}\left[-\dfrac{Q}{a^2}\ \hat{i}-\dfrac{Q}{a^2}\ \hat{j}+\dfrac{q}{2a^2}\ (\hat{i}+\hat{j})\right]$",
-                            r"\item $\vec{F}_{net}=\dfrac{q}{4\pi\epsilon_0\times a^2}\left[-2Q\ \hat{i}-2Q\ \hat{j}+q\hat{i}+q\hat{j}\right]$",
-                            r"\item $0=\dfrac{q}{4\pi\epsilon_0\times a^2}\left[(q-2Q)\ \hat{i}+(q-2Q)\ \hat{j}\right]\quad (\because \vec{F}_{net}=0)$",
-                            r"\item $(q-2Q)\ \hat{i}+(q-2Q)\ \hat{j}$",r"\item $q-2Q=0$ OR $q=2Q$ \\ $\therefore$ $Q$ and $q$ must have opposite sign and $q=2Q$",
+                            r"\item $\vec{F}_{net}=\dfrac{q}{4\pi\epsilon_0}\left[-\dfrac{Q}{a^2}\ \hat{i}-\dfrac{Q}{a^2}\ \hat{j}+\dfrac{q}{2a^2}\ \dfrac{(\hat{i}+\hat{j})}{\sqrt{2}}\right]$",
+                            r"\item $\vec{F}_{net}=\dfrac{q}{4\pi\epsilon_0\times a^2}\left[-2\sqrt{2}Q\ \hat{i}-2\sqrt{2}Q\ \hat{j}+q\hat{i}+q\hat{j}\right]$",
+                            r"\item $0=\dfrac{q}{4\pi\epsilon_0\times a^2}\left[(q-2\sqrt{2}Q)\ \hat{i}+(q-2\sqrt{2}Q)\ \hat{j}\right]\quad (\because \vec{F}_{net}=0)$",
+                            r"\item $(q-2\sqrt{2}Q)\ \hat{i}+(q-\sqrt{2}Q)\ \hat{j}$",r"\item $q-2\sqrt{2}Q=0$ OR $q=2\sqrt{2}Q$", r"\item $\therefore$ $Q$ and $q$ must have opposite sign and $q=2\sqrt{2}Q$",
                             itemize="itemize" ,page_width="27em").scale(0.65)
         self.next_slide()
         #g2 = Group(g1,list4).arrange(DOWN).next_to(ex_title,DOWN).to_edge(RIGHT)
-        line = Line(list3.get_top(),list3.get_bottom(),color=RED).next_to(list3,RIGHT)
-        Group(list3,line,list4).arrange(RIGHT,buff=0.1).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
+        line = Line(list4.get_top(),list4.get_bottom(),color=RED).next_to(list3,RIGHT)
         self.next_slide()
         self.play(Write(list3[0]))
         self.play(Create(g1[12:18]))
@@ -1601,12 +1600,16 @@ class Ex29(Slide):
         self.next_slide()
         self.play(Write(list3[4]))
         self.next_slide()
+        self.play(FadeOut(ex_title))
+        self.play(Group(sol_label,list3).animate.shift(2*UP))
         self.play(Write(list3[5]))
         self.next_slide()
+        self.play(FadeOut(g1))
+        Group(list3,line,list4).arrange(RIGHT,buff=0.1).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
         
         
         self.play(Create(line))
-        self.play(FadeOut(g1))
+        
         for item in list4:
             self.play(Write(item))
             self.next_slide()
@@ -1650,6 +1653,35 @@ class Ex30(Slide):
         f4_tex=Tex('$\\vec{F}_{54}$').next_to(f3_arrow,UR,buff=0).scale(0.5)
         g1 = VGroup(sq,q1,q1_text,q2,q2_text,q3,q3_text,q4,q4_text,q5,q5_text,arrow,arrow_text,f1_arrow,f1_tex,f1_arrow,f2_tex,f2_arrow,f3_tex,f3_arrow,f4_arrow,f4_tex).next_to(ex_title,DOWN).to_edge(RIGHT).shift(0.4*UP)
         self.play(Write(g1))
+
+        list3 =  LatexItems( r"\item $|\vec{F}_{51}|=\dfrac{1}{4\pi\epsilon_0}\dfrac{Qq}{r^2}=F$",
+                             r"\item $|\vec{F}_{52}|=\dfrac{1}{4\pi\epsilon_0}\dfrac{2Qq}{r^2}=2F$",
+                             r"\item $|\vec{F}_{53}|=\dfrac{1}{4\pi\epsilon_0}\dfrac{3Qq}{r^2}=3F$",
+                             r"\item $|\vec{F}_{54}|=\dfrac{1}{4\pi\epsilon_0}\dfrac{4Qq}{r^2}=4F$",
+                             r"\item We can see, $\vec{F}_{51}$ and $\vec{F}_{53}$ are exactly opposite to each other so its net effect will be $2F$ towards $Q$",
+                            itemize="itemize" ,page_width="16em").scale(0.65)
+        
+        list4 =  LatexItems(  r"\item Also, $\vec{F}_{52}$ and $\vec{F}_{54}$ are exactly opposite to each other so its net effect will be $2F$ towards $2Q$",
+                            r"\item So, the resultant force of $2F$ and $2F$ will be (using Pythagoras theorem) $2\sqrt{2} F$  ",
+                            r"\item Magnitude of resultant force $=\dfrac{2\sqrt{2}}{4\pi\epsilon_0}\dfrac{Qq}{(d/\sqrt{2})^2}=\dfrac{4\sqrt{2}}{4\pi\epsilon_0}\dfrac{Qq}{d^2}$",
+                            itemize="itemize" ,page_width="30em").scale(0.65).next_to(g1,DOWN)
+        self.next_slide()
+        #g2 = Group(g1,list4).arrange(DOWN).next_to(ex_title,DOWN).to_edge(RIGHT)
+        line = Line(list3.get_top(),list3.get_bottom(),color=RED).next_to(list3,RIGHT)
+        Group(list3,line,list4).arrange(RIGHT,buff=0.1).next_to(sol_label,DOWN).shift(RIGHT).to_corner(LEFT)
+        self.next_slide()
+
+        for item in list3:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(Create(line))
+        self.play(g1.animate.scale(0.7).shift(UP))
+        self.next_slide()
+
+        for item in list4:
+            self.play(Write(item))
+            self.next_slide()
 
 
 class Ex31(Slide):
