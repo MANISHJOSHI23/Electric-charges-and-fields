@@ -1232,7 +1232,7 @@ class Ex22(Slide):
 
 class Super(Slide):
     def construct(self):
-        title = Title('CHAPTER 1 : ELECTRIC CHARGES AND FILEDS',color=GREEN)
+        title = Title('CHAPTER 1 : ELECTRIC CHARGES AND FILEDS',color=GREEN,match_underline_width_to_text=True )
         self.add(title)
         Outline = Tex('Learning Objectives :',color=BLUE).next_to(title,DOWN,buff=0.5).to_corner(LEFT).scale(0.8)
         self.add(Outline)
@@ -1248,7 +1248,7 @@ class Super(Slide):
         self.play(RemoveTextLetterByLetter(list2))
         self.play(RemoveTextLetterByLetter(list))
         self.play(RemoveTextLetterByLetter(Outline))
-        super_title = Title("Forces between multiple charges and Superposition Principle", color=GREEN)
+        super_title = Title("Forces between multiple charges and Superposition Principle",match_underline_width_to_text=True, color=GREEN)
         self.play(ReplacementTransform(title,super_title))
         self.next_slide()
         Super_lbl = Tex('The superposition principle :',color=BLUE).next_to(title,DOWN,buff=0.5).to_corner(LEFT).scale(0.8)
@@ -1691,7 +1691,7 @@ class Ex31(Slide):
         )
         myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
 
-        ex_title = Tex("\\justifying {Example 1.6:  Consider three charges $q_1,\ q_2,\ q_3$ each equal to $q$ at the vertices of an equilateral triangle of side $l$. What is the force on a charge $Q$ (with the same sign as $q$) placed at the centroid of the triangle, as shown in Fig.? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
+        ex_title = Tex("Example 1.6:  Consider three charges $q_1,\ q_2,\ q_3$ each equal to $q$ at the vertices of an equilateral triangle of side $l$. What is the force on a charge $Q$ (with the same sign as $q$) placed at the centroid of the triangle, as shown in Fig.? ",tex_environment="{minipage}{10cm}",font_size=35, color=BLUE_C).to_corner(UP)
         img = ImageMobject('Ex31.png').scale(0.6).next_to(ex_title,DR).to_edge(RIGHT)
         self.play(Write(ex_title))
         self.play(FadeIn(img))
@@ -1702,15 +1702,37 @@ class Ex31(Slide):
 
 class Ex32(Slide):
     def construct(self):
-        myBaseTemplate = TexTemplate(
-            documentclass="\documentclass[preview]{standalone}"
-        )
-        myBaseTemplate.add_to_preamble(r"\usepackage{ragged2e}")
 
-        ex_title = Tex("\\justifying {Example 1.7:  Consider the charges $q,\ q,$ and $-q$ placed at the vertices of an equilateral triangle, as shown in Fig. . What is the force on each charge? }",tex_template=myBaseTemplate, color=BLUE_C).to_corner(UP).scale(0.8)
-        img = ImageMobject('Ex32.png').scale(0.6).next_to(ex_title,DR).to_edge(RIGHT)
+        ex_title = Tex("Example 1.7:  Consider the charges $q,\ q,$ and $-q$ placed at the vertices of an equilateral triangle, as shown in Fig. . What is the force on each charge? ",substrings_to_isolate=":",tex_environment="{minipage}{8cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title.set_color_by_tex("Example",GREEN)
+        ex_title.set_color_by_tex(":",GREEN)
+        img = ImageMobject('Ex32.png').scale_to_fit_width(4).next_to(ex_title,RIGHT,buff=1).align_to(ex_title,UP)
+        img_rect= SurroundingRectangle(img)
         self.play(Write(ex_title))
-        self.play(FadeIn(img))
+        self.play(FadeIn(img,img_rect))
         self.next_slide()
-        sol_label =Tex('Solution :', color=ORANGE).next_to(ex_title,DOWN).to_edge(LEFT).scale(0.8)
+        sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
         self.play(Write(sol_label)) 
+        list4 =  LatexItems(r"\item[(a)]  Calculation for Force on  $q_1\ (F_1)$",
+                            r"\item[] $|\vec{F}_{12}|=|\vec{F}_{13}|=\dfrac{1}{4\pi\epsilon_0}\dfrac{q^2}{l^2}=F$",
+                            r"\item[] Magnitude of net force on $q_1$ $(|\vec{F}_{1}|)$ is",
+                            r"\item[] $|\vec{F}_{1}|=\sqrt{|\vec{F}_{12}|^2+|\vec{F}_{13}|^2+2|\vec{F}_{12}||\vec{F}_{13}|\cos\theta}$",
+                            r"\item[] $|\vec{F}_{1}|=\sqrt{F^2+F^2+2F^2\cos(120)}$",
+                            r"\item[] $|\vec{F}_{1}|=\sqrt{2F^2-2F^2\times\dfrac{1}{2}}=\sqrt{2F^2-F^2}$\\$|\vec{F}_{1}|=F$",
+                            font_size=35,itemize="itemize" ,page_width="8cm").next_to(sol_label,DOWN).align_to(sol_label,LEFT)
+        line = Line([0,sol_label.get_y(UP),0],[0,config.bottom[1],0],color=RED).next_to(list4,RIGHT).align_to(sol_label,UP)
+        list5=  LatexItems(r"\item[(b)]  Similarly, Magnitude of net force \\ on $q_2$ $|\vec{F}_{2}|=F$",
+                           r"\item[(c)]  Calculation for Force on  $q_3\ (F_3)$",
+                            r"\item[] $|\vec{F}_{31}|=|\vec{F}_{32}|=F$",
+                            r"\item[] Magnitude of net force on $q_3$ is",
+                            r"\item[] $|\vec{F}_{3}|=\sqrt{F^2+F^2+2F^2\cos(60)}$\\ $|\vec{F}_{3}|=\sqrt{3}F$",
+                            font_size=35,itemize="itemize" ,page_width="7cm").next_to(line,RIGHT).align_to([0,img_rect.get_y(DOWN),0],UP).shift(0.1*DOWN)
+        self.next_slide()
+        for item in list4:
+            self.play(Write(item))
+            self.next_slide()
+        self.play(Write(line))
+        self.next_slide()
+        for item in list5:
+            self.play(Write(item))
+            self.next_slide()
