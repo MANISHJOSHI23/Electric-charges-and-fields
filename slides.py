@@ -4,26 +4,7 @@ from manim import *  # or: from manimlib import *
 
 from manim_slides import Slide
 
-class NewMaskLine(Line):
-    def __init__(self,label: Tex|MathTex, pos = None, rel_pos: float = 0.5,bg: ParsableManimColor = BLACK, opacity:float= 1  , *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-
-        # calculating the vector for the label position
-        line_start, line_end = self.get_start_and_end()
-        new_vec = (line_end - line_start) * rel_pos
-        label_coords = line_start + new_vec
-        label.move_to(label_coords)
-        rect = Rectangle(height=label.height,width=label.width,color=RED,fill_opacity=1) 
-        mask = Intersection(rect,self,color=RED,fill_opacity = opacity)
-        #mask  = Line(label.get_center()-0.6*label.width*self.get_unit_vector(),label.get_center()+0.6*label.width*self.get_unit_vector(),color=bg,stroke_width=self.get_stroke_width()+1,stroke_opacity=opacity)
-        #mask = Intersection(self,label,color=bg,stroke_color=bg,fill_opacity=opacity)
-        #ang=angle_of_vector(self.get_unit_vector())
-        #label.rotate(ang)
-        self.add(mask)
-        #label.shift(pos)
-        self.add(label)
-
-def MyLabeledDot(label_in:Tex| None = None,label_out:Tex| None = None,pos:Vector = DOWN,shift=[0,0,0], point=ORIGIN,radius: float = DEFAULT_DOT_RADIUS,color: ParsableManimColor = WHITE):
+def MyLabeledDot(label_in:Tex| None = None,label_out:Tex| None = None,pos:Vector = DOWN,shift=[0,0,0], point=ORIGIN,radius: float = DEFAULT_DOT_RADIUS,color = WHITE):
         if isinstance(label_in, Tex):
             radius = 0.02 + max(label_in.width, label_in.height) / 2
         
@@ -41,7 +22,7 @@ def MyLabeledDot(label_in:Tex| None = None,label_out:Tex| None = None,pos:Vector
 
 
 class MyDashLabeledLine(DashedLine):
-    def __init__(self,label: Tex|MathTex, pos = None, rel_pos: float = 0.5,bg: ParsableManimColor = BLACK, opacity:float= 0.7,rot: bool =True  , *args, **kwargs) -> None:
+    def __init__(self,label: Tex|MathTex, pos = None, rel_pos: float = 0.5,bg = BLACK, opacity:float= 0.7,rot: bool =True  , *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
         # calculating the vector for the label position
@@ -67,7 +48,7 @@ class MyDashLabeledLine(DashedLine):
         self.add(label)
 
 class MyLabeledLine(Line):
-    def __init__(self,label: Tex|MathTex, pos = None, rel_pos: float = 0.5,bg: ParsableManimColor = BLACK, opacity:float= 0.7,rot: bool =True , *args, **kwargs) -> None:
+    def __init__(self,label: Tex|MathTex, pos = None, rel_pos: float = 0.5,bg = BLACK, opacity:float= 0.7,rot: bool =True , *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
         # calculating the vector for the label position
