@@ -85,6 +85,7 @@ jobs:
           wasysym
           xcolor
           xetex
+          cancel
           xkeyval
 
     - name: Install Python dependencies
