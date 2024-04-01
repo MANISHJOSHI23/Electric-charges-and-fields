@@ -1907,7 +1907,7 @@ class Elec_Fld(Slide):
         fig_3=g1.copy().add(q5,f2_arrow,f2_tex).next_to(fig_2,DOWN,buff=0.5).align_to(fig_2,LEFT)
         rec1 = SurroundingRectangle(VGroup(fig_2))
         rec2= SurroundingRectangle(VGroup(fig_3))
-        ef_for = AlignTex(r"\vec{E}&=\displaystyle{\lim_{q_0\to 0}\dfrac{\vec{F}}{q_0}}",r"=\displaystyle{\lim_{q_0\to 0}\dfrac{1}{4\pi\epsilon_0}\dfrac{Qq_0}{r^2 \times q_0}}\hat{r}",r"=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r^2 }\hat{r}",page_width="7cm", color=ORANGE).next_to(ef_int_def,DOWN).align_to(ef_int_lbl,LEFT).shift(0.6*RIGHT)
+        ef_for = AlignTex(r"\vec{E}&=\displaystyle{\lim_{q_0\to 0}\dfrac{\vec{F} }{q_0 } }",r"=\displaystyle{\lim_{q_0\to 0}\dfrac{1}{4\pi\epsilon_0}\dfrac{Qq_0}{r^2 \times q_0} }\hat{r}",r"=\dfrac{1}{4\pi\epsilon_0}\dfrac{Q}{r^2 }\hat{r}",page_width="7cm", color=ORANGE).next_to(ef_int_def,DOWN).align_to(ef_int_lbl,LEFT).shift(0.6*RIGHT)
         test_chrg =  LatexItems(r"\item  A test charge $(q_0)$ is a charge of small magnitude such that it does not disturb the Source charge $(Q)$ which produces the electric filed .",
                                 r"\item Though, $\vec{E} =(\vec{F}/q_0)$, but $\vec{E}$ does not depend on test charge $q_0$.",
                                 page_width="13cm").next_to(ef_for,DOWN).align_to(ef_int_lbl,LEFT).shift(0.2*RIGHT)
